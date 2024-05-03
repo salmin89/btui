@@ -1,8 +1,9 @@
 export interface IOBluetoothDevice {
   name: string;
-  nameOrAddress: string;
-  servicesCount: number;
-  isHandsFreeAudioGateway: boolean;
+  address: string;
+  isConnected: boolean;
+  isPaired: boolean;
+  isFavorite: boolean;
   services: {serviceName: string}[];
 }
 
@@ -16,7 +17,7 @@ export interface IOBluetoothWrapper {
   // getDevice(device: string): Promise<any>;
   connect(device: string): void;
   disconnect(device: string): void;
-  getDevices(): string;
+  getAllPairedDevices(): IOBluetoothDevice[];
 }
 
 declare module '@btui/bindings' {

@@ -6,7 +6,7 @@ import {execAsync} from './utils/node-utils.js'
 import { BTCommand, DeviceCommand } from './types/commands.js';
 import { State, BTHelper } from './utils/State.js';
 import { BlueutilsAdapter } from './adapters/blueutils-adapter.js';
-import { IOBluetoothDevice } from '@btui/bindings';
+import { IOBluetoothDevice, IOBluetoothWrapper } from '@btui/bindings';
 
 
 const spinner = p.spinner();
@@ -15,7 +15,8 @@ const btState = new State();
 
 
 async function main() {
-
+  console.clear();
+  
 	p.intro(`${color.bgMagenta(color.black('BT CLI'))}`);
   
   const state = await p.select<any, any>({
@@ -83,6 +84,7 @@ async function showDeviceCommands(device: IOBluetoothDevice) {
     case DeviceCommand.connect: {
       spinner.start(`connecting to ${device.name}`);
       // await execAsync(`blueutil --connect ${device.address}`);
+      IOBluetoothWrapper.connect(device.address);
       spinner.stop(`connected!`);
       break;
     }
@@ -90,6 +92,7 @@ async function showDeviceCommands(device: IOBluetoothDevice) {
     case DeviceCommand.disconnect: {
       spinner.start(`disconnecting ${device.name}`);
       // await execAsync(`blueutil --disconnect ${device.address}`);
+      IOBluetoothWrapper.disconnect(device.address);
       spinner.stop(`disconnected!`);
       break;
     }

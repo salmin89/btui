@@ -1,5 +1,5 @@
 import bind from 'bindings';
-const IOBluetoothWrapper = bind('IOBluetooth-wrapper');
+const IOBluetoothWrapper = bind('addon');
 
 export {
   IOBluetoothWrapper,

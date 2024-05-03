@@ -30,14 +30,15 @@ export class State {
 
   getPaired() {
     // const paired = await execAsync('blueutil --paired --format json') as any;
-    const paired = JSON.parse(IOBluetoothWrapper.getDevices());
+    const paired = IOBluetoothWrapper.getAllPairedDevices();
+    console.log(paired)
     this.paired = paired
     return this.paired
   }
 
   async getConnected(): Promise<IOBluetoothDevice[]> {
     // const connected = await execAsync('blueutil --connected --format json') as any;
-    const connected = JSON.parse(IOBluetoothWrapper.getDevices());
+    const connected = IOBluetoothWrapper.getAllPairedDevices();
     this.connected = connected
     return this.connected
   }
